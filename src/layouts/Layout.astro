@@ -3,12 +3,27 @@ import Header from "./Header.astro";
 import Footer from "./Footer.astro";
 import '../styles/style.scss';
 const { title } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, '本番環境のWebサイトURL');
+const ogpImageURL = new URL('/ogp.png', canonicalURL);
+
+const isHomePage = Astro.request.url.pathname === '/';
+const ogType = isHomePage ? 'website' : 'article';
 ---
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+  <head prefix="og: https://ogp.me/ns#">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- OGP設定 -->
+    <meta property="og:url" content=" ページのURL" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content=" ページのタイトル" />
+    <meta property="og:description" content=" ページの説明文" />
+    <meta property="og:site_name" content="サイト名" />
+    <meta property="og:image" content={ogpImageURL} />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@Twitterユーザー名" />
     <title>{ title }</title>
   </head>
   <body>
