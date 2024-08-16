@@ -1,37 +1,48 @@
 ---
 import Header from "./Header.astro";
 import Footer from "./Footer.astro";
-import '../styles/style.scss';
+import "../styles/style.scss";
 const { title } = Astro.props;
-const canonicalURL = new URL(Astro.url.pathname, '本番環境のWebサイトURL');
-const ogpImageURL = new URL('/ogp.png', canonicalURL);
-
-const isHomePage = Astro.request.url.pathname === '/';
-const ogType = isHomePage ? 'website' : 'article';
+import { SEO } from "astro-seo";
 ---
+
 <!DOCTYPE html>
 <html lang="en">
-  <head prefix="og: https://ogp.me/ns#">
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- OGP設定 -->
-    <meta property="og:url" content=" ページのURL" />
-    <meta property="og:type" content={ogType} />
-    <meta property="og:title" content=" ページのタイトル" />
-    <meta property="og:description" content=" ページの説明文" />
-    <meta property="og:site_name" content="サイト名" />
-    <meta property="og:image" content={ogpImageURL} />
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@Twitterユーザー名" />
-    <title>{ title }</title>
+    <SEO
+      title={title}
+      description="簡単なプロフィールと自分がアウトプットしているブログを一覧として掲載しているポートフォリオです。お問い合わせも受け付けてます。"
+      openGraph={{
+        basic: {
+          title: title,
+          type: "website",
+          image: "/assets/images/SEO.webp",
+        },
+      }}
+      twitter={{
+        creator: "@gako0012",
+      }},
+      extend={{
+        link: [{ rel: "icon", href: "/favicon.ico" }],
+        meta: [
+          {
+            name: "twitter:image",
+            content: "/assets/images/SEO.webp",
+          },
+          { name: "twitter:title", content: "ポートフォリオ" },
+          { name: "twitter:description", content: "簡単なプロフィールと自分がアウトプットしているブログを一覧として掲載しているポートフォリオです。お問い合わせも受け付けてます。" },
+        ],
+      }}
+    />
   </head>
   <body>
-		<Header />
+    <Header />
     <main class="l-main">
       <slot />
     </main>
-		<Footer />
+    <Footer />
     <script type="module" src="/assets/js/index.js"></script>
   </body>
 </html>
