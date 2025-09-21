@@ -1,12 +1,15 @@
-@use '../global' as *;
+@use "../global" as *;
 
 html {
-	text-size-adjust: 100%;
+  text-size-adjust: 100%;
   font-size: 62.5%;
 }
 
 body {
-  font-family: 'Arial',YuGothic,'Yu Gothic','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','メイリオ', Meiryo,'ＭＳ ゴシック',sans-serif;
+  font-family: "Arial", YuGothic, "Yu Gothic", "Hiragino Kaku Gothic ProN",
+    "ヒラギノ角ゴ ProN W3", "メイリオ", Meiryo, "ＭＳ ゴシック", sans-serif;
+  background: $white;
+  color: $gray1;
 }
 
 a {
@@ -19,4 +22,3 @@ img {
   width: 100%;
   height: auto;
 }
-

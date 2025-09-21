@@ -1,1 +1,6 @@
-@use '../global' as g;
+@use "../global" as g;
+
+.l-container {
+  width: min(92%, g.$inner);
+  margin-inline: auto;
+}

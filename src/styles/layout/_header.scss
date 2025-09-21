@@ -1,5 +1,208 @@
-@use '../global' as g;
+@use "../global" as g;
 
 .l-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4.8rem;
+  z-index: 100;
+  @include g.mq(md) {
+    height: 6.9rem;
+  }
 
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    gap: 5.6rem;
+    @include g.mq(md) {
+      gap: 4rem;
+    }
+  }
+
+  &__logo {
+    a {
+      img {
+        width: 5.2rem;
+        height: 2.1rem;
+        @include g.mq(md) {
+          width: 11.3rem;
+          height: 4.5rem;
+        }
+      }
+    }
+  }
+
+  &__nav {
+    @include g.mq(md) {
+      margin-left: auto;
+    }
+  }
+
+  &__list {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    @include g.mq(md) {
+      gap: 3.2rem;
+    }
+  }
+
+  &__item {
+    &--toggle {
+      cursor: pointer;
+      & > a {
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+        gap: 0.7rem;
+        transition: all g.$ts-time;
+        @include g.mq(md) {
+          gap: 1rem;
+        }
+
+        &::before {
+          content: "";
+          display: inline-block;
+          width: 1rem;
+          height: 0.7rem;
+          mask-repeat: no-repeat;
+          background-color: g.$accentGold;
+          mask-size: contain;
+          mask-image: url("/assets/images/header-toggle.svg");
+          mask-mode: luminance;
+          transition: all g.$ts-time;
+        }
+      }
+      &:hover {
+        > a {
+          color: g.$gray2;
+          &::before {
+            background-color: g.$gray2;
+            transform: rotate(180deg);
+          }
+        }
+      }
+    }
+
+    &--business {
+      display: none;
+      @include g.mq(md) {
+        display: block;
+      }
+    }
+
+    &--account {
+      display: none;
+      @include g.mq(md) {
+        display: block;
+      }
+    }
+  }
+
+  &__drop-menu {
+    position: relative;
+    &:hover {
+      .l-header__menu {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+
+  &__drop-menu-bg {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  &__link {
+    font-size: 1.4rem;
+    font-weight: bold;
+    letter-spacing: 0.04em;
+  }
+
+  &__icons {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+  }
+
+  &__icon {
+    &--logout {
+      display: block;
+      @include g.mq(md) {
+        display: none;
+      }
+    }
+
+    &--cart {
+    }
+
+    img {
+      width: 2.4rem;
+      height: 2.4rem;
+    }
+  }
+
+  &__menu {
+    opacity: 0;
+    width: min(90%, 100rem);
+    position: fixed;
+    top: 5.8rem;
+    margin-inline: auto;
+    padding: 1.6rem 1.3rem 1.6rem 1.6rem;
+    background: g.$white;
+    border-radius: 0.8rem;
+    transition: opacity 0.3s, visibility 0.3s; 
+    visibility: hidden;
+
+    @include g.mq(md) {
+      top: 8.9rem;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 2.4rem 4rem;
+    }
+    &-title {
+      font-size: 1.6rem;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+    }
+
+    &-list {
+      display: grid;
+      grid-template-columns: repeat(2, auto);
+      margin-top: 2.4rem;
+      gap: 3.2rem 2.4rem;
+      @include g.mq(md) {
+        grid-template-columns: repeat(5, auto);
+        gap: 3.2rem 4.8rem;
+      }
+      a {
+        display: inline-block;
+        width: 100%;
+        padding-bottom: 0.8rem;
+        border-bottom: 0.2rem solid g.$mainGray;
+        font-size: 1.4rem;
+        letter-spacing: 0.04em;
+        font-weight: 700;
+        transition: all g.$ts-time;
+        @include g.mq(md) {
+          font-size: 1.6rem;
+        }
+
+        &:hover {
+          border-color: g.$accentGreen;
+        }
+      }
+    }
+    &.is-active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
 }
